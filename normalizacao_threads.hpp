@@ -13,7 +13,8 @@
 #include <condition_variable>
 #include <atomic>
 #include <map>
-#include "thread_pool.hpp"
+#include <thread>
+#include <queue>
 
 using namespace std;
 
@@ -188,7 +189,7 @@ inline void gerar_dataset_codificado(const string& caminho,
                                      const unordered_map<string, unordered_map<string, int>>& mapas,
                                      size_t linhas_por_chunk) {
     ifstream entrada(caminho);
-    ofstream saida("dataset_codificado_omp.csv");
+    ofstream saida("dataset_codificado_th.csv");
 
     if (!entrada.is_open() || !saida.is_open()) {
         cerr << "Erro ao abrir arquivos." << endl;
